@@ -66,8 +66,13 @@ def authors_and_titles(): # not working yet
     query = r"\n([\W\w]*?)(\.\.)" 
     pattern = re.compile(query)
 
-    return [item[0] for item in pattern.findall(summary)]
+    list_all = [item[0].replace("\n","") for item in pattern.findall(summary) ] # if len(item[0]) > 0]
 
+    # list_all = [i.replace("\n","") for i in list_all if len(i) > 0]
+
+    pattern_titles = r"(?<=[a-z])[A-Z].*"
+
+    return [el for el in list_all if len(el) > 0]
 
 def get_topics():
     """retorna todos os títulos dos capítulos em formato csv"""
